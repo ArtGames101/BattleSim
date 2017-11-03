@@ -7,6 +7,7 @@ import sys
 import os
 import random
 import time
+import subprocess
 
 IS_WINDOWS = os.name == "nt"
 IS_MAC = sys.platform == "darwin"
@@ -36,7 +37,8 @@ def menu():
           "                                                    {}\n".format(v.ver, v.e, config.NAME))
     print("1. Battle")
     print("2. Multiplayer Battle")
-    print("3. Changelog")
+    print("e. Extras")
+    print("c. Changelog")
     print("?. Help")
     print("0. Exit\n")
     choice = user_choice()
@@ -44,7 +46,9 @@ def menu():
         gun()
     if choice == "2":
         tgun()
-    if choice == "3":
+    if choice == "e":
+        subprocess.call((sys.executable, "extras.py"))
+    if choice == "c":
         changelog()
     if choice == "?":
         halp()
@@ -69,18 +73,18 @@ def changelog():
     print("\n"
           "Whats New in Version {}?\n"
           "\n"
-          "* Added Changelog\n"
-          "* Added Multiplayer Battle\n"
+          "* Extras\n"
+          "* More Secrets\n"
           "\n"
           "\n"
           "Whats Next?\n"
           "\n"
           "* Online Multiplayer?\n"
           "* Sounds?\n"
-          "* Extras\n"
+          "* Waiting to fill!\n"
           "* Money?\n"
           "* Shop?\n"
-          "* More Secrets (there is already 1 o.o)\n".format(v.ver))
+          "* Waiting to fill!\n".format(v.ver))
     input("\nPush Enter to go to Menu!")
     menu()
 
