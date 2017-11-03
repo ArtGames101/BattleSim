@@ -1,2 +1,2 @@
-ver = "v0.1"
+ver = "v0.2"
 e = "Alpha"

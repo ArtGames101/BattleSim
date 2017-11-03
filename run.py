@@ -35,11 +35,17 @@ def menu():
           "|================|                                  Logged in as:\n"
           "                                                    {}\n".format(v.ver, v.e, config.NAME))
     print("1. Battle")
+    print("2. Multiplayer Battle")
+    print("3. Changelog")
     print("?. Help")
     print("0. Exit\n")
     choice = user_choice()
     if choice == "1":
         gun()
+    if choice == "2":
+        tgun()
+    if choice == "3":
+        changelog()
     if choice == "?":
         halp()
     if choice == "l":
@@ -53,6 +59,31 @@ def menu():
         sys.exit(1)
     else:
         menu()
+
+def changelog():
+    clear_screen()
+    print("|================|\n"
+          "|---Battle Sim---|\n"
+          "|   Changelog    |\n"
+          "|================|\n")
+    print("\n"
+          "Whats New in Version {}?\n"
+          "\n"
+          "* Added Changelog\n"
+          "* Added Multiplayer Battle\n"
+          "\n"
+          "\n"
+          "Whats Next?\n"
+          "\n"
+          "* Online Multiplayer?\n"
+          "* Sounds?\n"
+          "* Extras\n"
+          "* Money?\n"
+          "* Shop?\n"
+          "* More Secrets (there is already 1 o.o)\n".format(v.ver))
+    input("\nPush Enter to go to Menu!")
+    menu()
+
 def gun():
     clear_screen()
     print("Select a weapon!\n"
@@ -87,6 +118,42 @@ def gun():
         print("Fists Selected XD")
         time.sleep(2)
         battle()
+
+def tgun():
+    clear_screen()
+    print("Select a team weapon!\n"
+          "\n"
+          "1 - Shotgun\n"
+          "2 - Minigun\n"
+          "3 - Sniper Rifle\n"
+          "4 - Pistol\n"
+          "5 - Nerf Gun\n")
+    choice = user_choice()
+    if choice == "1":
+        print("Shotgun Selected!")
+        time.sleep(2)
+        tbattle()
+    if choice == "2":
+        print("Minigun Selected!")
+        time.sleep(2)
+        tbattle()
+    if choice == "3":
+        print("Sniper Rifle Selected!")
+        time.sleep(2)
+        tbattle()
+    if choice == "4":
+        print("Pistol Selected!")
+        time.sleep(2)
+        tbattle()
+    if choice == "5":
+        print("Nerf Gun Selected!")
+        time.sleep(2)
+        tbattle()
+    else:
+        print("Fists Selected XD")
+        time.sleep(2)
+        tbattle()
+
 def battle():
     bt = ["{} Got Wounded".format(config.NAME), "Bot was spotted!", "Bot Was Shot!", "Bot Got Wounded", "{} Was Shot".format(config.NAME)]
     wintitle = ["{} Won!".format(config.NAME), "Bot Won!"]
@@ -109,7 +176,40 @@ def battle():
     print("Ending Match...")
     time.sleep(3)
     clear_screen()
-    # Even tho its random it says who won correctly!
+    print(random.choice(wintitle))
+    input("\nPush Enter to continue!")
+    menu()
+
+def tbattle():
+    bt = ["{} Got Wounded".format(config.NAME), "Bot was spotted!", "Bot Was Shot!", "Bot Got Wounded", "{} Was Shot".format(config.NAME), "Friend was shot!", "Friend was wounded!", "Friend was spotted!"]
+    wintitle = ["{} & Your Friend Won!".format(config.NAME), "Bot & Bot's Friend Won!"]
+    clear_screen()
+    print("--------------------------------------------------\n"
+          "{} & {}     -VS-      {} & {}\n"
+          "--------------------------------------------------\n".format(config.NAME, random.choice(api.bname), random.choice(api.bname), random.choice(api.bname)))
+    input("\nPush Enter to Team Battle!!!\n")
+    clear_screen()
+    print("Battling...")
+    time.sleep(2)
+    print("[0.0.1] {}".format(random.choice(bt)))
+    time.sleep(2)
+    print("[0.0.2] {}".format(random.choice(bt)))
+    time.sleep(2)
+    print("[0.0.3] {}".format(random.choice(bt)))
+    time.sleep(2)
+    print("[0.0.4] {}".format(random.choice(bt)))
+    time.sleep(2)
+    print("[0.0.5] {}".format(random.choice(bt)))
+    time.sleep(2)
+    print("[0.0.6] {}".format(random.choice(bt)))
+    time.sleep(2)
+    print("[0.0.7] {}".format(random.choice(bt)))
+    time.sleep(2)
+    print("[0.0.8] {}".format(random.choice(bt)))
+    time.sleep(2)
+    print("Ending Match...")
+    time.sleep(3)
+    clear_screen()
     print(random.choice(wintitle))
     input("\nPush Enter to continue!")
     menu()
@@ -142,9 +242,6 @@ def halp():
         menu()
     else:
         halp()
-    
-    
-
 
 
 main()
