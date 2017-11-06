@@ -3,7 +3,7 @@
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)](https://python.org) [![Tested](https://img.shields.io/badge/tested-100%25-red.svg)](https://github.com/ArtGames101/Battle-Sim)
 
 # When Do i update?
-i actually update this quite fast so and update might be like 1 hour apart!
+i actually update this quite fast so an update might be like 1 hour apart!
 # What is this?
 Well my Friend this is a battle simulator created by [ArtGames](https://github.com/ArtGames101)
 
