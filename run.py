@@ -30,6 +30,94 @@ def main():
     menu()
 
 def menu():
+    clear_screen()
+    print("|================|                                  {} {}\n"
+          "|---Battle Sim---|                                  (c) 2017 ArtGames\n"
+          "|================|                                  Logged in as:\n"
+          "                                                    {}\n".format(v.ver, v.e, config.NAME))
+    print("1. Battle List\n")
+    print("2. Fun\n")
+    print("3. Help\n")
+    print("0. Exit")
+    choice = user_choice()
+    if choice == "1":
+        battlelist()
+    if choice == "2":
+        fun()
+    if choice == "3":
+        hlist()
+    if choice == "0":
+        clear_screen()
+        print("Stopped all scripts!")
+        sys.exit(1)
+
+def battlelist():
+    clear_screen()
+    print("|================|                                  {} {}\n"
+          "|---Battle Sim---|                                  (c) 2017 ArtGames\n"
+          "|================|                                  Logged in as:\n"
+          "                                                    {}\n".format(v.ver, v.e, config.NAME))
+    print("1. Battle")
+    print("2. Multiplayer Battle")
+    print("0. Back")
+    choice = user_choice()
+    if choice == "1":
+        if config.gunselection == True:
+            gun()
+        else:
+            battle()
+    if choice == "2":
+        if config.tgunselection == True:
+            tgun()
+        else:
+            tbattle()
+    if choice == "0":
+        menu()
+
+def fun():
+    clear_screen()
+    print("|================|                                  {} {}\n"
+          "|---Battle Sim---|                                  (c) 2017 ArtGames\n"
+          "|================|                                  Logged in as:\n"
+          "                                                    {}\n".format(v.ver, v.e, config.NAME))
+    print("1. Extras")
+    print("2. Input Code")
+    print("0. Back")
+    choice = user_choice()
+    if choice == "1":
+        if config.extras == True:
+            subprocess.call((sys.executable, "extras.py"))
+        else:
+            input("Extras is Disabled!")
+            menu()
+    if choice == "2":
+        code()
+    if choice == "0":
+        menu()
+
+def hlist():
+    clear_screen()
+    print("|================|                                  {} {}\n"
+          "|---Battle Sim---|                                  (c) 2017 ArtGames\n"
+          "|================|                                  Logged in as:\n"
+          "                                                    {}\n".format(v.ver, v.e, config.NAME))
+    print("1. Tutorial")
+    print("2. Changelog")
+    print("3. Settings")
+    print("4. Help")
+    print("0. Back")
+    choice = user_choice()
+    if choice == "1":
+        tutorial()
+    if choice == "2":
+        changelog()
+    if choice == "3":
+        settings()
+    if choice == "4":
+        halp()
+    if choice == "0":
+        menu()
+def msenu():
     # Main Menu
     clear_screen()
     print("|================|                                  {} {}\n"
@@ -115,6 +203,7 @@ def settings():
     else:
         print("Ads : False")
     input(".")
+    menu()
 def code():
     clear_screen()
     print("Input a Secret Code (type back to go back!)\n")
@@ -140,8 +229,8 @@ def changelog():
     print("\n"
           "Whats New in Version {}?\n"
           "\n"
-          "* Tutorials\n"
-          "* Advertisements\n"
+          "* Sections\n"
+          "\n"
           "\n"
           "\n"
           "Whats Next?\n"
@@ -151,7 +240,7 @@ def changelog():
           "* Waiting to Fill!\n"
           "* Money?\n"
           "* Shop?\n"
-          "* Sections\n".format(v.ver))
+          "* Waiting to Fill!\n".format(v.ver))
     input("\nPush Enter to go to Menu!")
     menu()
 
