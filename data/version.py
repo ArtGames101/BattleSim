@@ -1,4 +1,4 @@
-ver = "v0.3"
-e = "Alpha"
+ver = "v0.4"
+e = "BETA"
 
-ever = "0.1"
+ever = "0.2"

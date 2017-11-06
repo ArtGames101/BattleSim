@@ -37,19 +37,38 @@ def menu():
           "                                                    {}\n".format(v.ver, v.e, config.NAME))
     print("1. Battle")
     print("2. Multiplayer Battle")
-    print("e. Extras")
+    if config.extras == True:
+        print("e. Extras")
+    else:
+        print("\a")
+    print("r. Input Code")
     print("c. Changelog")
+    print("!. Settings")
     print("?. Help")
     print("0. Exit\n")
     choice = user_choice()
     if choice == "1":
-        gun()
+        if config.gunselection == True:
+            gun()
+        else:
+            battle()
     if choice == "2":
-        tgun()
+        if config.tgunselection == True:
+            tgun()
+        else:
+            tbattle()
     if choice == "e":
-        subprocess.call((sys.executable, "extras.py"))
+        if config.extras == True:
+            subprocess.call((sys.executable, "extras.py"))
+        else:
+            input("Extras is Disabled!")
+            menu()
     if choice == "c":
         changelog()
+    if choice == "r":
+        code()
+    if choice == "!":
+        settings()
     if choice == "?":
         halp()
     if choice == "l":
@@ -64,6 +83,42 @@ def menu():
     else:
         menu()
 
+def settings():
+    clear_screen()
+    print("Change Your Settings in Config!")
+    print("==============\n"
+          "---Settings---\n"
+          "==============\n")
+    print("Name : {}\n".format(config.NAME))
+    if config.gunselection == True:
+        print("Gun Selection : True\n")
+    else:
+        print("Gun Selection : False\n")
+    if config.tgunselection == True:
+        print("Team Gun Selection : True\n")
+    else:
+        print("Team Gun Selection : False\n")
+    if config.extras == True:
+        print("Extras : True\n")
+    else:
+        print("Extras : False")
+    input(".")
+def code():
+    clear_screen()
+    print("Input a Secret Code (type back to go back!)\n")
+    choice = user_choice()
+    if choice == "1christmasxyz":
+        clear_screen()
+        print("Merry Christmas!")
+        input(".")
+        menu()
+    if choice == "7hallowee1n98":
+        clear_screen()
+        print("Happy Halloween!")
+        input(".")
+        menu()
+    if choice == "back":
+        menu()
 def changelog():
     clear_screen()
     print("|================|\n"
@@ -73,18 +128,18 @@ def changelog():
     print("\n"
           "Whats New in Version {}?\n"
           "\n"
-          "* Extras\n"
-          "* More Secrets\n"
+          "* Input Codes\n"
+          "* Settings\n"
           "\n"
           "\n"
           "Whats Next?\n"
           "\n"
           "* Online Multiplayer?\n"
           "* Sounds?\n"
-          "* Waiting to fill!\n"
+          "* Advertisements?\n"
           "* Money?\n"
           "* Shop?\n"
-          "* Waiting to fill!\n".format(v.ver))
+          "* Tutorial?\n".format(v.ver))
     input("\nPush Enter to go to Menu!")
     menu()
 

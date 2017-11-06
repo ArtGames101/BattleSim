@@ -3,6 +3,7 @@ import sys
 import os
 import time
 import random
+import config
 from data import version as v
 from data import bots as api
 IS_WINDOWS = os.name == "nt"
@@ -56,5 +57,9 @@ def toss():
     print("Oh My Gawd you got {} rings on!".format(random.choice(n)))
     input("Press Enter to Go back to menu!")
     menu()
-    
-menu()
+
+if config.extras == True:    
+    menu()
+else:
+    clear_screen()
+    print("Extras is Disabled!")
