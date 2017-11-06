@@ -11,4 +11,6 @@ tgunselection = True
 
 extras = True
 
+ads = True
+
 
