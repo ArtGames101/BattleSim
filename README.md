@@ -18,6 +18,8 @@ its going to be NONE of that its going to be like an adventure game!
 * Money?
 * And MORE!
 
+SO BE READY FOR THE UPDATE!
+
 # When Do i update?
 i actually update this quite fast so an update might be like 1 hour apart!
 # What is this?
