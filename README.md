@@ -9,7 +9,9 @@ like:
 * Tutorial updates
 * Battle updates
 * Etc
+
 its going to be NONE of that its going to be like an adventure game!
+
 * Quests
 * New Weapons
 * Pets
