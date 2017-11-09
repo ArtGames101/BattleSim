@@ -13,6 +13,32 @@ import subprocess
 IS_WINDOWS = os.name == "nt"
 IS_MAC = sys.platform == "darwin"
 
+def loading():
+    clear_screen()
+    d = ["Did you know that the first version of battle sim was released in 2 days!", "This game has been fully tested!", "Did you know this game was made by ArtGames101?"]
+    print("10% {}".format(random.choice(d)))
+    time.sleep(2)
+    clear_screen()
+    print("30% {}".format(random.choice(d)))
+    time.sleep(2)
+    clear_screen()
+    print("40% {}".format(random.choice(d)))
+    time.sleep(2)
+    clear_screen()
+    print("50% {}".format(random.choice(d)))
+    time.sleep(2)
+    clear_screen()
+    print("70% {}".format(random.choice(d)))
+    time.sleep(2)
+    clear_screen()
+    print("100% {}".format(random.choice(d)))
+    time.sleep(2)
+    clear_screen()
+    print("Have Fun!")
+    time.sleep(2)
+
+    main()
+
 def clear_screen():
     if IS_WINDOWS:
         os.system("cls")
@@ -229,8 +255,8 @@ def changelog():
     print("\n"
           "Whats New in Version {}?\n"
           "\n"
-          "* Sections\n"
-          "\n"
+          "* Loading Screen\n"
+          "* \n"
           "\n"
           "\n"
           "Whats Next?\n"
@@ -480,4 +506,5 @@ def st():
     print("See your settings!")
     input("\nPush Enter to continue!")
     settings()
-main()
+
+loading()
