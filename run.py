@@ -1,19 +1,34 @@
 # (c) ArtGames 2017
 
 import config
-from data import ads
-from data import bots as api
-from data import version as v
 import sys
 import os
 import random
 import time
 import subprocess
+from data import version as v
+
+def clear_screen():
+    if IS_WINDOWS:
+        os.system("cls")
+    else:
+        os.system("clear")
+
+# Shorts        
+name = config.warriorname
+wtype = config.warriortype
+pet = config.pet
+weapon = config.weapon
 
 IS_WINDOWS = os.name == "nt"
 IS_MAC = sys.platform == "darwin"
 
 def loading():
+    unwarfile = open("unwar.txt", "w")
+    unwarfile.write("Electric Warrior\n")
+    unwarfile.write("Fire Warrior\n")
+    unwarfile.write("Water Warrior\n")
+    unwarfile.close()
     clear_screen()
     d = ["Did you know that the first version of battle sim was released in 2 days!", "This game has been fully tested!", "Did you know this game was made by ArtGames101?"]
     print("10% {}".format(random.choice(d)))
@@ -36,475 +51,241 @@ def loading():
     clear_screen()
     print("Have Fun!")
     time.sleep(2)
-
     main()
 
-def clear_screen():
-    if IS_WINDOWS:
-        os.system("cls")
-    else:
-        os.system("clear")
+
 
 def user_choice():
     return input("\n>>> ").lower().strip()
 
 def main():
-    # Starting screen
     clear_screen()
-    print("Welcome to battle sim {} {}!".format(v.ver, v.e))
-    input("\nPush Enter to continue!")
-    menu()
-
-def menu():
-    clear_screen()
-    print("|================|                                  {} {}\n"
-          "|---Battle Sim---|                                  (c) 2017 ArtGames\n"
-          "|================|                                  Logged in as:\n"
-          "                                                    {}\n".format(v.ver, v.e, config.NAME))
-    print("1. Battle List\n")
-    print("2. Fun\n")
-    print("3. Help\n")
+    print("+ + + + + + + +\n"
+          "   Battle Sim  \n"
+          "+ + + + + + + +\n")
+    print("++++v0.1.1++++\n")
+    print("\n"
+          "1. Start Your Adventure")
+    print("2. Changelog")
     print("0. Exit")
     choice = user_choice()
     if choice == "1":
-        battlelist()
-    if choice == "2":
-        fun()
-    if choice == "3":
-        hlist()
-    if choice == "0":
-        clear_screen()
-        print("Stopped all scripts!")
-        sys.exit(1)
-
-def battlelist():
-    clear_screen()
-    print("|================|                                  {} {}\n"
-          "|---Battle Sim---|                                  (c) 2017 ArtGames\n"
-          "|================|                                  Logged in as:\n"
-          "                                                    {}\n".format(v.ver, v.e, config.NAME))
-    print("1. Battle")
-    print("2. Multiplayer Battle")
-    print("0. Back")
-    choice = user_choice()
-    if choice == "1":
-        if config.gunselection == True:
-            gun()
-        else:
-            battle()
-    if choice == "2":
-        if config.tgunselection == True:
-            tgun()
-        else:
-            tbattle()
-    if choice == "0":
-        menu()
-
-def fun():
-    clear_screen()
-    print("|================|                                  {} {}\n"
-          "|---Battle Sim---|                                  (c) 2017 ArtGames\n"
-          "|================|                                  Logged in as:\n"
-          "                                                    {}\n".format(v.ver, v.e, config.NAME))
-    print("1. Extras")
-    print("2. Input Code")
-    print("0. Back")
-    choice = user_choice()
-    if choice == "1":
-        if config.extras == True:
-            subprocess.call((sys.executable, "extras.py"))
-        else:
-            input("Extras is Disabled!")
-            menu()
-    if choice == "2":
-        code()
-    if choice == "0":
-        menu()
-
-def hlist():
-    clear_screen()
-    print("|================|                                  {} {}\n"
-          "|---Battle Sim---|                                  (c) 2017 ArtGames\n"
-          "|================|                                  Logged in as:\n"
-          "                                                    {}\n".format(v.ver, v.e, config.NAME))
-    print("1. Tutorial")
-    print("2. Changelog")
-    print("3. Settings")
-    print("4. Help")
-    print("0. Back")
-    choice = user_choice()
-    if choice == "1":
-        tutorial()
+        begin()
     if choice == "2":
         changelog()
-    if choice == "3":
-        settings()
-    if choice == "4":
-        halp()
-    if choice == "0":
-        menu()
-def msenu():
-    # Main Menu
-    clear_screen()
-    print("|================|                                  {} {}\n"
-          "|---Battle Sim---|                                  (c) 2017 ArtGames\n"
-          "|================|                                  Logged in as:\n"
-          "                                                    {}\n".format(v.ver, v.e, config.NAME))
-    print("1. Battle")
-    print("2. Multiplayer Battle")
-    print("t. Tutorial")
-    if config.extras == True:
-        print("e. Extras")
-    else:
-        print("\a")
-    print("r. Input Code")
-    print("c. Changelog")
-    print("!. Settings")
-    print("?. Help")
-    print("0. Exit\n")
-    if config.ads == True:
-        print(random.choice(ads.a))
-    else:
-        print("\a")
-    choice = user_choice()
-    if choice == "1":
-        if config.gunselection == True:
-            gun()
-        else:
-            battle()
-    if choice == "2":
-        if config.tgunselection == True:
-            tgun()
-        else:
-            tbattle()
-    if choice == "t":
-        tutorial()
-    if choice == "e":
-        if config.extras == True:
-            subprocess.call((sys.executable, "extras.py"))
-        else:
-            input("Extras is Disabled!")
-            menu()
-    if choice == "c":
-        changelog()
-    if choice == "r":
-        code()
-    if choice == "!":
-        settings()
-    if choice == "?":
-        halp()
-    if choice == "l":
-        # Dont Tell O.O
-        print("You found the secret (o.o)")
-        input("Dont tell anyone...")
-        menu()
     if choice == "0":
         clear_screen()
-        print("Stopped all scripts!")
+        print("+ + + + + + + + +\n"
+              " See you later!\n"
+              "+ + + + + + + + +\n")
         sys.exit(1)
     else:
-        menu()
+        main()
 
-def settings():
-    clear_screen()
-    print("Change Your Settings in Config!")
-    print("==============\n"
-          "---Settings---\n"
-          "==============\n")
-    print("Name : {}\n".format(config.NAME))
-    if config.gunselection == True:
-        print("Gun Selection : True\n")
-    else:
-        print("Gun Selection : False\n")
-    if config.tgunselection == True:
-        print("Team Gun Selection : True\n")
-    else:
-        print("Team Gun Selection : False\n")
-    if config.extras == True:
-        print("Extras : True\n")
-    else:
-        print("Extras : False")
-    if config.ads == True:
-        print("Ads : True")
-    else:
-        print("Ads : False")
-    input(".")
-    menu()
-def code():
-    clear_screen()
-    print("Input a Secret Code (type back to go back!)\n")
-    choice = user_choice()
-    if choice == "1christmasxyz":
-        clear_screen()
-        print("Merry Christmas!")
-        input(".")
-        menu()
-    if choice == "7hallowee1n98":
-        clear_screen()
-        print("Happy Halloween!")
-        input(".")
-        menu()
-    if choice == "back":
-        menu()
 def changelog():
     clear_screen()
-    print("|================|\n"
-          "|---Battle Sim---|\n"
-          "|   Changelog    |\n"
-          "|================|\n")
-    print("\n"
-          "Whats New in Version {}?\n"
+    print("-------------\n"
+          "+ Changelog +\n"
+          "-------------\n")
+    print("Whats New in Version {}?\n"
           "\n"
-          "* Loading Screen\n"
-          "* \n"
+          "\n"
+          "* Everything has changed!\n"
           "\n"
           "\n"
           "Whats Next?\n"
-          "\n"
-          "* Online Multiplayer?\n"
-          "* Sounds?\n"
-          "* Waiting to Fill!\n"
-          "* Money?\n"
-          "* Shop?\n"
-          "* Waiting to Fill!\n".format(v.ver))
-    input("\nPush Enter to go to Menu!")
-    menu()
+          "Nothing Yet!".format(v.ver))
+    input("\nPush Enter to go back!")
+    main()
 
-def gun():
+def begin():
     clear_screen()
-    print("Select a weapon!\n"
-          "\n"
-          "1 - Shotgun\n"
-          "2 - Minigun\n"
-          "3 - Sniper Rifle\n"
-          "4 - Pistol\n"
-          "5 - Nerf Gun\n")
+    print("Hello {} Welcome to Battle-Sim! {}".format(name, v.ver))
+    input("\nEnter")
+    clear_screen()
+    print("Your Stats for battle:\n"
+          "======================\n"
+          "NAME = {}\n"
+          "Type = {}\n"
+          "Pet = {}\n"
+          "Weapon = {}\n"
+          "======================\n".format(name, wtype, pet, weapon))
+    print("You can check this anytime in menu by pushing s!")
+    input("\nEnter")
+    lobby()
+
+def lobby():
+    clear_screen()
+    print("==============\n"
+          "     Menu     \n"
+          "==============\n")
+    print("1. Battle CPU")
+    print("Multiplayer Battle (Comming Soon!)")
+    print("Quests (Comming Soon!)")
+    print("4. Unlocked Characters")
+    print("0. Back to Main menu")
     choice = user_choice()
     if choice == "1":
-        print("Shotgun Selected!")
-        time.sleep(2)
-        battle()
+        cpubattle()
     if choice == "2":
-        print("Minigun Selected!")
-        time.sleep(2)
-        battle()
+        input("Comming Soon!")
+        lobby()
     if choice == "3":
-        print("Sniper Rifle Selected!")
-        time.sleep(2)
-        battle()
+        quests()
     if choice == "4":
-        print("Pistol Selected!")
-        time.sleep(2)
-        battle()
-    if choice == "5":
-        print("Nerf Gun Selected!")
-        time.sleep(2)
-        battle()
-    else:
-        print("Fists Selected XD")
-        time.sleep(2)
-        battle()
-
-def tgun():
-    clear_screen()
-    print("Select a team weapon!\n"
-          "\n"
-          "1 - Shotgun\n"
-          "2 - Minigun\n"
-          "3 - Sniper Rifle\n"
-          "4 - Pistol\n"
-          "5 - Nerf Gun\n")
-    choice = user_choice()
-    if choice == "1":
-        print("Shotgun Selected!")
-        time.sleep(2)
-        tbattle()
-    if choice == "2":
-        print("Minigun Selected!")
-        time.sleep(2)
-        tbattle()
-    if choice == "3":
-        print("Sniper Rifle Selected!")
-        time.sleep(2)
-        tbattle()
-    if choice == "4":
-        print("Pistol Selected!")
-        time.sleep(2)
-        tbattle()
-    if choice == "5":
-        print("Nerf Gun Selected!")
-        time.sleep(2)
-        tbattle()
-    else:
-        print("Fists Selected XD")
-        time.sleep(2)
-        tbattle()
-
-def battle():
-    bt = ["{} Got Wounded".format(config.NAME), "Bot was spotted!", "Bot Was Shot!", "Bot Got Wounded", "{} Was Shot".format(config.NAME)]
-    wintitle = ["{} Won!".format(config.NAME), "Bot Won!"]
-    clear_screen()
-    print("-------------------------------\n"
-          "{}      -VS-      {}\n"
-          "-------------------------------\n".format(config.NAME, random.choice(api.bname)))
-    input("\nPush Enter to Battle!!!\n")
-    clear_screen()
-    print("Battling...")
-    time.sleep(2)
-    print("[0.0.1] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.2] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.3] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.4] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("Ending Match...")
-    time.sleep(3)
-    clear_screen()
-    print(random.choice(wintitle))
-    input("\nPush Enter to continue!")
-    menu()
-
-def tbattle():
-    bt = ["{} Got Wounded".format(config.NAME), "Bot was spotted!", "Bot Was Shot!", "Bot Got Wounded", "{} Was Shot".format(config.NAME), "Friend was shot!", "Friend was wounded!", "Friend was spotted!"]
-    wintitle = ["{} & Your Friend Won!".format(config.NAME), "Bot & Bot's Friend Won!"]
-    clear_screen()
-    print("--------------------------------------------------\n"
-          "{} & {}     -VS-      {} & {}\n"
-          "--------------------------------------------------\n".format(config.NAME, random.choice(api.bname), random.choice(api.bname), random.choice(api.bname)))
-    input("\nPush Enter to Team Battle!!!\n")
-    clear_screen()
-    print("Battling...")
-    time.sleep(2)
-    print("[0.0.1] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.2] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.3] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.4] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.5] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.6] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.7] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("[0.0.8] {}".format(random.choice(bt)))
-    time.sleep(2)
-    print("Ending Match...")
-    time.sleep(3)
-    clear_screen()
-    print(random.choice(wintitle))
-    input("\nPush Enter to continue!")
-    menu()
-
-def halp():
-    clear_screen()
-    print("What do you need help with?:\n"
-          "\n"
-          "1* Errors\n"
-          "2* Game stopped working\n"
-          "3* Other\n"
-          "0 Back\n")
-    choice = user_choice()
-    if choice == "1":
         clear_screen()
-        input("Try Restarting the game or restarting your computer if this does\n"
-              "not work uninstall then reinstall this game!\n")
-        halp()
-    if choice == "2":
-        clear_screen()
-        input("if the game had stopped working you wouldnt be reading this\n"
-              "\n"
-              "Try reinstalling this game!\n")
-        halp()
-    if choice == "3":
-        clear_screen()
-        input("Report the bug/error on github! (Remember this is {}!)".format(v.e))
-        halp()
+        unwarfile = open("unwar.txt", "r")
+        print("=================\n"
+              "Unlocked Warriors\n"
+              "=================\n")
+        print(unwarfile.read())
+        print("\n Enter any of these in config!")
+        input("\nEnter")
+        unwarfile.close()
+        lobby()
     if choice == "0":
-        menu()
-    else:
-        halp()
+        main()
+    if choice == "s":
+        stats()
 
-def tutorial():
+def stats():
     clear_screen()
-    print("Welcome To The Tutorial!\n"
-          "\n"
-          "Here you will learn how to play this game!\n"
-          "Type a number to learn how to use it!\n")
-    print("1. Battle Option")
-    print("2. Extras")
-    print("3. Settings")
-    print("0. Back")
-    choice = user_choice()
-    if choice == "1":
-        bt()
-    if choice == "2":
-        et()
-    if choice == "3":
-        st()
-    if choice == "0":
-        menu()
+    print("Your Stats for battle:\n"
+          "======================\n"
+          "NAME = {}\n"
+          "Type = {}\n"
+          "Pet = {}\n"
+          "Weapon = {}\n"
+          "======================\n".format(name, wtype, pet, weapon))
+    input("\nEnter")
+    lobby()
 
-def bt():
-    # Battle Tutorial
+# Battles
+def cpubattle():
+    bname = ["(@MOD) ArtGames101", "(@MOD) Nik", "jeff", "bob", "Abigail", "Samantha", "Sam", "Alyssa", "Luke", "Zane", "Philip", "Ben", "Byron", "Slayer", "Nikolas", "Peter", "Summer"]
+    btype = ["Rainbow"]
+    bpet = ["Omega Dragon", "GiantLizard", "BigBadWolf", "Lizard", "Dragon", "Wolf"]
+    bweapon = ["Birthday Sword", "Halloween Sword", "Christmas Sword", "Sword", "Gun", "Sniper", "Fists", "Nerf Gun"]
+    battacks = ["Water Strike", "Water Fall", "Fire Storm", "Fire Wheel", "Static Attack", "Electric Cyclone"]
     clear_screen()
-    print("Welcome to the Battle Tutorial")
-    input("\nPush Enter to continue!")
+    print("Your Stats for battle:\n"
+          "======================\n"
+          "NAME = {}\n"
+          "Type = {}\n"
+          "Pet = {}\n"
+          "Weapon = {}\n"
+          "======================\n\n".format(name, wtype, pet, weapon))
+    print("Bots Stats for battle:\n"
+          "======================\n"
+          "NAME = {}\n"
+          "Type = {}\n"
+          "Pet = {}\n"
+          "Weapon = {}\n"
+          "======================\n".format(random.choice(bname), random.choice(btype), random.choice(bpet), random.choice(bweapon)))
+    input("\nReady to battle!")
     clear_screen()
-    print("Today i will teach you how to battle!\n"
-          "First off in the menu you need to push 1 then enter\n")
-    input("\nPush Enter to continue!")
+    print("------\n"
+          "     |\n"
+          "     |\n"
+          "-----|\n"
+          "     |\n"
+          "     |\n"
+          "------\n")
+    time.sleep(1)
     clear_screen()
-    print("After it will show a screen which will show you your name and\n"
-          "Who you are battling\n")
-    input("\nPush Enter to continue!")
+    2
+    print("------\n"
+          "    /\n"
+          "   / \n"
+          "  /  \n"
+          " /   \n"
+          "/    \n"
+          "------\n")
+    time.sleep(1)
     clear_screen()
-    print("After you have seen that screen you need to push enter to start the battle!")
-    input("\nPush Enter to continue!")
+    print("------\n"
+          "     |\n"
+          "     |\n"
+          "     |\n"
+          "     |\n"
+          "     |\n"
+          "---------\n")
+    time.sleep(1)
     clear_screen()
-    print("Once the battle has finished you will be taken back to the menu!")
-    input("\nPush Enter to continue!")
+    print("|----  (-)   ___   |   |   |     |\n"
+          "|           |  |   |   |   |     |\n"
+          "|       |   |  |   |   |   |     |\n"
+          "|----   |   |__|   |---|  ---    |\n"
+          "|       |      |   |   |   |     |\n"
+          "|       |      |   |   |   |     \n"
+          "|       |   ---|   |   |   |    (-)\n")
     clear_screen()
-    print("Now its your turn to battle!\n")
-    input("\nPush Enter to continue!")
-    gun()
+    if wtype == "Electric":
+        attacks = ["Heal", "Static Attack", "Electric Cyclone", "Thunder", "ThunderBolt"]
+    if wtype == "Fire":
+        attacks = ["Heal", "Fire Storm", "Fire Wheel"]
+    if wtype == "Water":
+        attacks = ["Heal", "Water Strike", "Water Fall"]
+    clear_screen()
+    used = ["Bot used {}".format(random.choice(battacks)), "{} used {}".format(name, random.choice(attacks))]
+    print("[20] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[19] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[18] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[17] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[16] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[15] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[14] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[13] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[12] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[11] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[10] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[9] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[8] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[7] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[6] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[5] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[4] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[3] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[2] {}".format(random.choice(used)))
+    time.sleep(1)
+    print("[1] {}".format(random.choice(used)))
+    time.sleep(1)
+    clear_screen()
+    print("Ending Match in 3")
+    time.sleep(1)
+    clear_screen()
+    print("Ending Match in 2")
+    time.sleep(1)
+    clear_screen()
+    print("Ending Match in 1")
+    won()
 
-def et():
+def won():
+    won = ["=+++Bot Won!+++=", "=+++{} Won!+++=".format(name)]
     clear_screen()
-    print("Welcome to the Extras Tutorial!")
-    input("\nPush Enter to continue!")
+    print("Calculating...")
+    time.sleep(5)
     clear_screen()
-    print("In Extras its a bunch of random games\n"
-          "Which you can play (There will be more soon!)")
-    input("\nPush Enter to continue!")
-    clear_screen()
-    print("In The Menu there is a bunch of game options\n"
-          "EG : if you pick 1 it will take you to a dice!")
-    input("\nPush Enter to continue!")
-    clear_screen()
-    print("Now its your turn to play some games!")
-    input("\nPush Enter to continue!")
-    # If Extras is disabled it wont work
-    subprocess.call((sys.executable, "extras.py"))
-
-def st():
-    clear_screen()
-    print("Welcome to the settings tutorial!")
-    input("\nPush Enter to continue!")
-    clear_screen()
-    print("Well for one settings choose how your game play works or reacts\n"
-          "EG : From Settings we can tell that your name is {}!".format(config.NAME))
-    input("\nPush Enter to continue!")
-    clear_screen()
-    print("To Choose this games settings go to config.py!")
-    input("\nPush Enter to continue!")
-    clear_screen()
-    print("See your settings!")
-    input("\nPush Enter to continue!")
-    settings()
-
+    print(random.choice(won))
+    input("Push Enter to go to lobby!")
+    lobby()
+    
 loading()

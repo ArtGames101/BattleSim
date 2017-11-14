@@ -1,16 +1,15 @@
-NAME = "@MOD"
+# Warriors:
+# Electric, Fire, Water
 
-# Settings
-# How to use:
-# If a setting is True it means the game is using it!
-# If a setting is False it means the game is not using it!
+warriorname = "Jeff"
+warriortype = "Electric"
 
-gunselection = True
+# Pets:
+# Lizard, Dragon, Wolf
 
-tgunselection = True
+pet = "Dragon"
 
-extras = True
+# Weapons:
+# Choose any!
 
-ads = True
-
-
+weapon = "Sword"
