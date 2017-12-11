@@ -1,12 +1,18 @@
 # (c) ArtGames 2017
 
-import config
+errormsg = "==========\nError 404\n==========\nOops! Looks like one of our servers failed!\n\nPlease try again later!"
 import sys
-import os
-import random
-import time
-import subprocess
-from data import version as v
+try:
+    import config
+    import sys
+    import os
+    import random
+    import time
+    import subprocess
+    from data import version as v
+except Exception as ImportError:
+    input(errormsg)
+    sys.exit()
 
 def clear_screen():
     if IS_WINDOWS:
@@ -14,39 +20,67 @@ def clear_screen():
     else:
         os.system("clear")
 
-# Shorts        
+def user_choice():
+    return input("\n0> ").lower().strip()
+
+# Shorts
+orig = "Electric Warrior (Common)\nFire Warrior (Common)\nWater Warrior (Common)"
 name = config.warriorname
 wtype = config.warriortype
 pet = config.pet
 weapon = config.weapon
+exittext = ["See you later {}!".format(name), "Goodbye SpaceCowboy", "{} : hi\nGame : hi\nGame : JINX!".format(name), "Hello... Goodbye!"]
 
 IS_WINDOWS = os.name == "nt"
 IS_MAC = sys.platform == "darwin"
 
 def loading():
-    unwarfile = open("unwar.txt", "w")
-    unwarfile.write("Electric Warrior\n")
-    unwarfile.write("Fire Warrior\n")
-    unwarfile.write("Water Warrior\n")
-    unwarfile.close()
+    try:
+        unwarfile = open("unwar.txt", "w")
+        unwarfile.write("Electric Warrior (Common)\n")
+        unwarfile.write("Fire Warrior (Common)\n")
+        unwarfile.write("Water Warrior (Common)\n")
+        unwarfile.close()
+    except Exception as ImportError:
+        input(errormsg)
+        sys.exit()
+    
     clear_screen()
-    d = ["Did you know that the first version of battle sim was released in 2 days!", "This game has been fully tested!", "Did you know this game was made by ArtGames101?"]
-    print("10% {}".format(random.choice(d)))
+    d = ["Did you know that the first version of battle sim was released in 2 days!", "This game has been fully tested!", "Did you know this game was made by ArtGames101?", "This Game is made with Love!", "Collect Special Characters for Halloween & Christmas!", "(c) ArtGames101", "Friend us on XBOX ONE (artucuno)", "Battle-Sim is made in Python!"]
+    print("=============\n"
+          " Loading...  \n"
+          "=============\n"
+          "10% \n{}".format(random.choice(d)))
     time.sleep(2)
     clear_screen()
-    print("30% {}".format(random.choice(d)))
+    print("=============\n"
+          " Loading.  \n"
+          "=============\n"
+          "20% \n{}".format(random.choice(d)))
     time.sleep(2)
     clear_screen()
-    print("40% {}".format(random.choice(d)))
+    print("=============\n"
+          " Loading..  \n"
+          "=============\n"
+          "40% \n{}".format(random.choice(d)))
     time.sleep(2)
     clear_screen()
-    print("50% {}".format(random.choice(d)))
+    print("=============\n"
+          " Loading...  \n"
+          "=============\n"
+          "50% \n{}".format(random.choice(d)))
     time.sleep(2)
     clear_screen()
-    print("70% {}".format(random.choice(d)))
+    print("=============\n"
+          " Loading.  \n"
+          "=============\n"
+          "70% \n{}".format(random.choice(d)))
     time.sleep(2)
     clear_screen()
-    print("100% {}".format(random.choice(d)))
+    print("=============\n"
+          " Loading..  \n"
+          "=============\n"
+          "100% \n{}".format(random.choice(d)))
     time.sleep(2)
     clear_screen()
     print("Have Fun!")
@@ -54,16 +88,12 @@ def loading():
     main()
 
 
-
-def user_choice():
-    return input("\n>>> ").lower().strip()
-
 def main():
     clear_screen()
     print("+ + + + + + + +\n"
           "   Battle Sim  \n"
           "+ + + + + + + +\n")
-    print("++++v0.1.1++++\n")
+    print("++++{}++++\n".format(v.ver))
     print("\n"
           "1. Start Your Adventure")
     print("2. Changelog")
@@ -75,9 +105,7 @@ def main():
         changelog()
     if choice == "0":
         clear_screen()
-        print("+ + + + + + + + +\n"
-              " See you later!\n"
-              "+ + + + + + + + +\n")
+        print(random.choice(exittext))
         sys.exit(1)
     else:
         main()
@@ -90,20 +118,25 @@ def changelog():
     print("Whats New in Version {}?\n"
           "\n"
           "\n"
-          "* Everything has changed!\n"
+          "* Added Heaps Of New Things!\n"
+          "\n"
           "\n"
           "\n"
           "Whats Next?\n"
-          "Nothing Yet!".format(v.ver))
+          "* Team Battles (v 0.1.6)".format(v.ver))
     input("\nPush Enter to go back!")
     main()
 
 def begin():
     clear_screen()
-    print("Hello {} Welcome to Battle-Sim! {}".format(name, v.ver))
+    print("===============\n"
+          "    Welcome    \n"
+          "===============\n"
+          "Hello {} Welcome to Battle-Sim! {}".format(name, v.ver))
     input("\nEnter")
     clear_screen()
-    print("Your Stats for battle:\n"
+    print("======================\n"
+          "Your Stats for battle:\n"
           "======================\n"
           "NAME = {}\n"
           "Type = {}\n"
@@ -120,10 +153,12 @@ def lobby():
           "     Menu     \n"
           "==============\n")
     print("1. Battle CPU")
-    print("Multiplayer Battle (Comming Soon!)")
-    print("Quests (Comming Soon!)")
-    print("4. Unlocked Characters")
+    print("3. Quests (1)")
+    print("4. Collect Christmas Warrior!")
+    print("5. Unlocked Characters")
     print("0. Back to Main menu")
+    print("\n"
+          "(c) ArtGames101 2017")
     choice = user_choice()
     if choice == "1":
         cpubattle()
@@ -133,6 +168,16 @@ def lobby():
     if choice == "3":
         quests()
     if choice == "4":
+        last = open("lastcol.txt", "r")
+        lastw = open("lastcol.txt", "w")
+        unwarfile = open("unwar.txt", "w")
+        unwarfile.write("{} \nChristmas Warrior (Rare)\n".format(orig))
+        lastw.write("Christmas Warrior\n")
+        unwarfile.close()
+        clear_screen()
+        input("Collected Christmas Warrior!")
+        lobby()
+    if choice == "5":
         clear_screen()
         unwarfile = open("unwar.txt", "r")
         print("=================\n"
@@ -150,7 +195,8 @@ def lobby():
 
 def stats():
     clear_screen()
-    print("Your Stats for battle:\n"
+    print("======================\n"
+          "Your Stats for battle:\n"
           "======================\n"
           "NAME = {}\n"
           "Type = {}\n"
@@ -168,7 +214,8 @@ def cpubattle():
     bweapon = ["Birthday Sword", "Halloween Sword", "Christmas Sword", "Sword", "Gun", "Sniper", "Fists", "Nerf Gun"]
     battacks = ["Water Strike", "Water Fall", "Fire Storm", "Fire Wheel", "Static Attack", "Electric Cyclone"]
     clear_screen()
-    print("Your Stats for battle:\n"
+    print("======================\n"
+          "Your Stats for battle:\n"
           "======================\n"
           "NAME = {}\n"
           "Type = {}\n"
@@ -220,34 +267,9 @@ def cpubattle():
           "|       |      |   |   |   |     \n"
           "|       |   ---|   |   |   |    (-)\n")
     clear_screen()
-    if wtype == "Electric":
-        attacks = ["Heal", "Static Attack", "Electric Cyclone", "Thunder", "ThunderBolt"]
-    if wtype == "Fire":
-        attacks = ["Heal", "Fire Storm", "Fire Wheel"]
-    if wtype == "Water":
-        attacks = ["Heal", "Water Strike", "Water Fall"]
+    attacks = ["Heal", "Static Attack", "Electric Cyclone", "Thunder", "ThunderBolt", "Heal", "Fire Storm", "Fire Wheel", "Heal", "Water Strike", "Water Fall"]
     clear_screen()
     used = ["Bot used {}".format(random.choice(battacks)), "{} used {}".format(name, random.choice(attacks))]
-    print("[20] {}".format(random.choice(used)))
-    time.sleep(1)
-    print("[19] {}".format(random.choice(used)))
-    time.sleep(1)
-    print("[18] {}".format(random.choice(used)))
-    time.sleep(1)
-    print("[17] {}".format(random.choice(used)))
-    time.sleep(1)
-    print("[16] {}".format(random.choice(used)))
-    time.sleep(1)
-    print("[15] {}".format(random.choice(used)))
-    time.sleep(1)
-    print("[14] {}".format(random.choice(used)))
-    time.sleep(1)
-    print("[13] {}".format(random.choice(used)))
-    time.sleep(1)
-    print("[12] {}".format(random.choice(used)))
-    time.sleep(1)
-    print("[11] {}".format(random.choice(used)))
-    time.sleep(1)
     print("[10] {}".format(random.choice(used)))
     time.sleep(1)
     print("[9] {}".format(random.choice(used)))
@@ -287,5 +309,22 @@ def won():
     print(random.choice(won))
     input("Push Enter to go to lobby!")
     lobby()
-    
+
+def quests():
+    clear_screen()
+    print("============\n"
+          "   Quests   \n"
+          "============\n")
+    print("\n"
+          "1. Play a game of CPU Battle")
+    print("\n0. Back\n"
+          "More Soon!")
+    choice = user_choice()
+    if choice == "1":
+        cpubattle()
+    if choice == "0":
+        lobby()
+    else:
+        quests()
+
 loading()
