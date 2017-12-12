@@ -10,9 +10,7 @@ try:
     import time
     import subprocess
     from data import version as v
-except Exception as ImportError:
-    input(errormsg)
-    sys.exit()
+except Exception as ImportError
 
 def clear_screen():
     if IS_WINDOWS:
